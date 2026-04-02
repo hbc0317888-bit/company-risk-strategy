@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>企业战略体系交互式导图</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">公司战略课程作业</p>
+          <h1>企业战略体系交互式导图</h1>
+          <p class="subtitle">
+            用网页方式展示总体战略、业务单元战略和职能战略之间的层级与关联。
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-label">展示模式</span>
+            <strong id="current-view-label">关系网络图</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">当前节点</span>
+            <strong id="current-node-label">企业战略体系</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="toolbar">
+        <div class="view-switcher" role="tablist" aria-label="视图切换">
+          <button class="view-btn active" data-view="graph" type="button">
+            关系网络图
+          </button>
+          <button class="view-btn" data-view="tree" type="button">
+            树状思维导图
+          </button>
+        </div>
+
+        <div class="toolbar-actions">
+          <input
+            id="node-search"
+            class="search-input"
+            type="search"
+            placeholder="搜索节点，例如：差异化战略"
+            aria-label="搜索节点"
+          />
+        </div>
+      </section>
+
+      <main class="content-grid">
+        <section class="visual-panel">
+          <div id="graph-view" class="view-panel active" aria-live="polite">
+            <div class="graph-instructions">
+              <span>关系图采用固定布局，点击节点可高亮其关联关系。</span>
+            </div>
+            <div id="graph-stage" class="graph-stage">
+              <svg
+                id="graph-svg"
+                class="graph-svg"
+                viewBox="0 0 1100 600"
+                role="img"
+                aria-label="企业战略体系关系网络图"
+              >
+                <g id="graph-viewport"></g>
+              </svg>
+            </div>
+            <div class="legend">
+              <span><i class="legend-dot contains"></i> 包含关系</span>
+              <span><i class="legend-dot guides"></i> 指导关系</span>
+              <span><i class="legend-dot supports"></i> 支撑关系</span>
+              <span><i class="legend-dot requires"></i> 依赖关系</span>
+            </div>
+          </div>
+
+          <div id="tree-view" class="view-panel" aria-live="polite">
+            <div class="tree-toolbar">
+              <button id="expand-all-btn" class="ghost-btn" type="button">
+                全部展开
+              </button>
+              <button id="collapse-all-btn" class="ghost-btn" type="button">
+                收起层级
+              </button>
+            </div>
+            <div id="tree-container" class="tree-container"></div>
+          </div>
+        </section>
+
+        <aside class="info-panel">
+          <div class="info-card">
+            <p class="info-label">节点名称</p>
+            <h2 id="detail-title">企业战略体系</h2>
+            <p id="detail-category" class="detail-category">根节点</p>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">节点概览</p>
+            <div id="detail-facts" class="info-grid"></div>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">概述</p>
+            <p id="detail-summary" class="detail-summary"></p>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">关键要点</p>
+            <ul id="detail-points" class="detail-list"></ul>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">下级条目</p>
+            <ul id="detail-children" class="tag-list"></ul>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">关联节点</p>
+            <ul id="detail-relations" class="tag-list"></ul>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">关系解读</p>
+            <div id="detail-relation-summary" class="detail-note"></div>
+          </div>
+
+          <div class="info-card">
+            <p class="info-label">学习提示</p>
+            <ul id="detail-study-tips" class="detail-list"></ul>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./data/strategy-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
